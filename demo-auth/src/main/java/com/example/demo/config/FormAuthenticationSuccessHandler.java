@@ -18,8 +18,8 @@ public class FormAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
     @Resource
     private ObjectMapper objectMapper;
 
-    @Resource
-    private AuthorizationServerTokenServices authorizationServerTokenServices;
+//    @Resource
+//    private AuthorizationServerTokenServices authorizationServerTokenServices;
 
     private static final String BEARER_TOKEN_TYPE = "Basic ";
 

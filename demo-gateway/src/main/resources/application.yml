@@ -1,0 +1,27 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: demo-gateway
+
+#zuul:
+#  routes:
+#    auth-route:
+#      path: /auth/**
+#      serviceId: demo-auth
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#    registry-route:
+#      path: /registry/**
+#      serviceId: demo-registry
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8087/eureka

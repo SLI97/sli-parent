@@ -1,27 +1,41 @@
 server:
   port: 8086
+  servlet:
+    context-path: /gateway
 
 spring:
   application:
     name: demo-gateway
 
-#zuul:
-#  routes:
-#    auth-route:
-#      path: /auth/**
-#      serviceId: demo-auth
-#      stripPrefix: false
-#      sensitiveHeaders:
-#
-#    registry-route:
-#      path: /registry/**
-#      serviceId: demo-registry
-#      stripPrefix: false
-#      sensitiveHeaders:
-#
-#eureka:
-#  client:
-#    register-with-eureka: true
-#    fetch-registry: true
-#    service-url:
-#      defaultZone: http://localhost:8087/eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: sli:${spring.application.name}:${spring.application.instance_id}:${server.port}}
+
+
+zuul:
+  routes:
+    auth-route:
+      path: /auth/**
+      serviceId: demo-auth
+      stripPrefix: false
+      sensitiveHeaders:
+
+    registry-route:
+      path: /registry/**
+      serviceId: demo-registry
+      stripPrefix: false
+      sensitiveHeaders:
+
+    config-route:
+      path: /config/**
+      serviceId: demo-config
+      stripPrefix: false
+      sensitiveHeaders:
+

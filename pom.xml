@@ -63,6 +63,7 @@
         <module>demo-config</module>
         <module>demo-registry</module>
         <module>demo-gateway</module>
+        <module>demo-workflow</module>
     </modules>
 
 </project>

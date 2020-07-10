@@ -1,19 +1,29 @@
 server:
-  port: 8087
-  servlet:
-    context-path: /config
+  port: 8888
 
 spring:
   application:
     name: demo-config
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/
+  security:
+    basic:
+      enabled: true
+    user:
+      password: ${CONFIG_SERVICE_PASSWORD:password}
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-    instance-id: sli:${spring.application.name}:${spring.application.instance_id}:${server.port}}
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#    instance-id: sli:${spring.application.name}:${spring.application.instance_id}:${server.port}}

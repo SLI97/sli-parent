@@ -1,0 +1,13 @@
+server:
+  port: 8761
+  servlet:
+    context-path: /registry
+
+eureka:
+  client:
+    register-with-eureka: false    #默认是true，将自己注册到eureka上
+    fetch-registry: false    #是否从eureka上获取信息，由于本案例是单机，无需从别的eureka上获取注册信息
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/registry/
+  instance:
+    hostname: localhost

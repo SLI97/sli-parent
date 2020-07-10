@@ -1,0 +1,41 @@
+#server:
+#  port: 8081
+#  servlet:
+#    context-path: /gateway
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: sli_eureka:${spring.application.name}:${server.port}
+
+#zuul:
+#  routes:
+#    auth-route:
+#      path: /auth/**
+#      serviceId: demo-auth
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#    registry-route:
+#      path: /registry/**
+#      serviceId: demo-registry
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#    config-route:
+#      path: /config/**
+#      serviceId: demo-config
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#    workflow-route:
+#      path: /workflow/**
+#      serviceId: demo-workflow
+#      stripPrefix: false
+#      sensitiveHeaders:

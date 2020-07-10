@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -22,8 +23,15 @@ import org.springframework.web.filter.CorsFilter;
 @EnableDiscoveryClient
 public class GatewayApplication {
     public static void main(String[] args) {
+
         SpringApplication.run(GatewayApplication.class, args);
     }
+
+    @Value("${spring.cloud.config.password}")
+    private String password;
+
+    @Value("${spring.application.name}")
+    private String name;
 
     @Bean
     public FilterRegistrationBean corsFilter() {
@@ -43,6 +51,8 @@ public class GatewayApplication {
     class HelloController {
         @RequestMapping(value = "/hello", method = RequestMethod.GET)
         public String hello() {
+            System.out.println(password);
+            System.out.println(name);
             return "haha2344";
         }
     }

@@ -1,7 +1,7 @@
 server:
   port: 4000
-  servlet:
-    context-path: /gateway
+#  servlet:
+#    context-path: /gateway
 
 spring:
   application:
@@ -37,7 +37,7 @@ zuul:
       disable: false
   routes:
     auth-route:
-      path: /auth/**
+      path: /uaa/**
       serviceId: demo-auth
       stripPrefix: false
       sensitiveHeaders:
@@ -59,3 +59,6 @@ zuul:
       serviceId: demo-workflow
       stripPrefix: false
       sensitiveHeaders:
+
+  add-proxy-headers: true
+  add-host-header: true

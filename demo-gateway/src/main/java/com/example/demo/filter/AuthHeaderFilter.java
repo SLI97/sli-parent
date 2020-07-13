@@ -33,18 +33,30 @@ public class AuthHeaderFilter extends ZuulFilter {
         RequestContext context = RequestContext.getCurrentContext();
         HttpServletRequest request = context.getRequest();
         String token = request.getHeader("authorization");
-        if (token != null ){
+        System.out.println(token);
+
+//        doSomething();
+        if (token != null) {
             //登录过
             System.out.println("过！");
             return "过！";
-        }else{
+        } else {
             //无效
             //告诉后面的过滤器，在当前就已经出问题了，没必要去进行路由转发了
 //            context.setSendZuulResponse(false);
 //            context.setResponseStatusCode(401);
 //            context.setResponseBody("{\"msg\":\"401,access without permission,please login first.\"}");
             System.out.println("不过！！");
+            try {
+                throw new Exception("没有token");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return "access denied";
         }
     }
+
+//    private void doSomething(RequestContext requestContext) throws {
+//
+//    }
 }

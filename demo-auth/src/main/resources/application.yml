@@ -6,6 +6,8 @@ server:
 #����Դ����
 #ָ������
 spring:
+  application:
+    name: demo-auth
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mydemo
@@ -13,6 +15,16 @@ spring:
     password: GUI123ZONG
     type: com.alibaba.druid.pool.DruidDataSource
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: sli_eureka:${spring.application.name}:${server.port}
 
 #Mybatis������ ����mapper�ļ��ĵ�ַ
 #mybatis-plus.mapper-locations=classpath:/mappers/*Mapper.xml

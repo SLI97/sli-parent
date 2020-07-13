@@ -2,6 +2,7 @@ package com.example.demo.service.imp;
 
 import com.example.demo.config.AuthUserDto;
 import com.example.demo.config.SecurityUser;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         AuthUserDto userDto = new AuthUserDto();
+        if(!"sli".equals(s)){
+            throw new InternalAuthenticationServiceException("账号不存在");
+        }
         userDto.setUsername("sli");
 //        userDto.setPassword("123456");
         userDto.setPassword(new BCryptPasswordEncoder().encode("123456"));

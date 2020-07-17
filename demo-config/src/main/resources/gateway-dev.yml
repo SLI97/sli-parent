@@ -3,16 +3,16 @@
 #  servlet:
 #    context-path: /gateway
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-    instance-id: sli_eureka:${spring.application.name}:${server.port}
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#    instance-id: sli_eureka:${spring.application.name}:${server.port}
 
 #zuul:
 #  routes:

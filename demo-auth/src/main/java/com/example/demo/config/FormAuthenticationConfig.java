@@ -21,7 +21,8 @@ public class FormAuthenticationConfig {
      * @throws Exception the exception
      */
     void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
+        http.formLogin().permitAll()
+//                .loginPage("/auth/require")
                 .loginProcessingUrl("/auth/login")
                 .successHandler(formAuthenticationSuccessHandler)
                 .failureHandler(formAuthenticationFailureHandler);

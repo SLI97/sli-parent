@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,17 +22,18 @@ import org.springframework.web.filter.CorsFilter;
 @ComponentScan({"com.example"})
 @EnableZuulProxy
 @EnableDiscoveryClient
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class GatewayApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(GatewayApplication.class, args);
     }
 
-    @Value("${spring.cloud.config.password}")
-    private String password;
-
-    @Value("${spring.application.name}")
-    private String name;
+//    @Value("${spring.cloud.config.password}")
+//    private String password;
+//
+//    @Value("${spring.application.name}")
+//    private String name;
 
     @Bean
     public FilterRegistrationBean corsFilter() {
@@ -51,8 +53,8 @@ public class GatewayApplication {
     class HelloController {
         @RequestMapping(value = "/hello", method = RequestMethod.GET)
         public String hello() {
-            System.out.println(password);
-            System.out.println(name);
+//            System.out.println(password);
+//            System.out.println(name);
             return "haha2344";
         }
     }

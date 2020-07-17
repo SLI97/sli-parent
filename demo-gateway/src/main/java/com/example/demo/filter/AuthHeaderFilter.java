@@ -15,7 +15,6 @@ public class AuthHeaderFilter extends ZuulFilter {
         return FilterConstants.PRE_TYPE;
     }
 
-
     @Override
     public int filterOrder() {
         //同类型的过滤器，数字越小，优先级越高
@@ -46,12 +45,12 @@ public class AuthHeaderFilter extends ZuulFilter {
 //            context.setSendZuulResponse(false);
 //            context.setResponseStatusCode(401);
 //            context.setResponseBody("{\"msg\":\"401,access without permission,please login first.\"}");
-            System.out.println("不过！！");
-            try {
-                throw new Exception("没有token");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            System.out.println("没有token！！");
+//            try {
+//                throw new Exception("没有token");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
             return "access denied";
         }
     }

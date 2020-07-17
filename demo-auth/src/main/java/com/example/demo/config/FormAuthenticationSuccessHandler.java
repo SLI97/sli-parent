@@ -53,6 +53,7 @@ public class FormAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return;
         }
 
         String[] tokens = RequestUtils.extractAndDecodeHeader(header);

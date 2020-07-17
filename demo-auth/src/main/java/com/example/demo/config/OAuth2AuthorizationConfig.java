@@ -14,8 +14,10 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +36,23 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private DataSource dataSource;
 
+    @Resource
+    private TokenStore tokenStore;
+
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+    @Autowired
+    private TokenEnhancer jwtTokenEnhancer;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 使用JdbcClientDetailsService客户端详情服务
+//        clients.inMemory()
+//                .withClient("browser")
+//                .authorizedGrantTypes("authorization_code", "implicit")
+//                .authorities("ROLE_CLIENT")
+//                .scopes("read","ui");
         clients.withClientDetails(clientDetails());
     }
 
@@ -47,24 +60,19 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.authenticationManager(authenticationManager)
                 // 配置JwtAccessToken转换器
-                .accessTokenConverter(jwtAccessTokenConverter)
+//                .accessTokenConverter(jwtAccessTokenConverter)
                 // refresh_token需要userDetailsService
-                .reuseRefreshTokens(false).userDetailsService(userDetailsService);
-        //.tokenStore(getJdbcTokenStore());
+                .reuseRefreshTokens(false).userDetailsService(userDetailsService)
+        .tokenStore(tokenStore);
 
-
-//        endpoints.tokenStore(tokenStore)
-//                .authenticationManager(authenticationManager).reuseRefreshTokens(false)
-//                .userDetailsService(userDetailsService);
-//
-//        if (jwtAccessTokenConverter != null && jwtTokenEnhancer != null) {
-//            TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-//            List<TokenEnhancer> enhancers = new ArrayList<>();
-//            enhancers.add(jwtTokenEnhancer);
-//            enhancers.add(jwtAccessTokenConverter);
-//            tokenEnhancerChain.setTokenEnhancers(enhancers);
-//            endpoints.tokenEnhancer(tokenEnhancerChain).accessTokenConverter(jwtAccessTokenConverter);
-//        }
+        if (jwtAccessTokenConverter != null && jwtTokenEnhancer != null) {
+            TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+            List<TokenEnhancer> enhancers = new ArrayList<>();
+            enhancers.add(jwtTokenEnhancer);
+            enhancers.add(jwtAccessTokenConverter);
+            tokenEnhancerChain.setTokenEnhancers(enhancers);
+            endpoints.tokenEnhancer(tokenEnhancerChain).accessTokenConverter(jwtAccessTokenConverter);
+        }
     }
 
     @Override
@@ -73,9 +81,10 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
                 // 开启/oauth/token_key验证端口无权限访问
                 .tokenKeyAccess("permitAll()")
                 // 开启/oauth/check_token验证端口认证权限访问
-                .checkTokenAccess("isAuthenticated()");
+                .checkTokenAccess("isAuthenticated()")
+                .allowFormAuthenticationForClients();
+//                .checkTokenAccess("permitAll()");
 
-//        oauthServer.allowFormAuthenticationForClients();
     }
 
     public ClientDetailsService clientDetails() {

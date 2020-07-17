@@ -6,14 +6,14 @@ server:
 spring:
   application:
     name: demo-gateway
-  cloud:
-    config:
-      uri: http://localhost:8888
-      password: ${CONFIG_SERVICE_PASSWORD:password}
-      username: user
-      name: gateway
-      profile: ${spring.profiles.active:dev}
-      fail-fast: true #是否启动快速失败功能，功能开启则优先判断config server是否正常
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      password: ${CONFIG_SERVICE_PASSWORD:password}
+#      username: user
+#      name: gateway
+#      profile: ${spring.profiles.active:dev}
+#      fail-fast: true #是否启动快速失败功能，功能开启则优先判断config server是否正常
 #          retry:
 #            initial-interval: 1000 #最初重试间隔为 1000 毫秒
 #            max-attempts: 6 #最多重试 6 次
@@ -21,13 +21,29 @@ spring:
 #            multiplier: 1.1 #每次重试失败后，重试间隔所增加的倍数
 #      label: ${spring.profiles.active:master}
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: sli_eureka:${spring.application.name}:${server.port}
+
+ribbon:
+  ReadTimeout: 50000
+  ConnectTimeout: 50000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+  eager-load:
+    enabled: true
+    clients: demo-auth,demo-registry, demo-config,demo-workflow
 
 zuul:
   retryable: true
-  ribbon:
-    eager-load:
-      enabled: true
-      clients: demo-auth,demo-registry, demo-config,demo-workflow
   host:
     connect-timeout-millis: 60000
     socket-timeout-millis: 60000

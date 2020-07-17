@@ -14,6 +14,9 @@ spring:
     username: root
     password: GUI123ZONG
     type: com.alibaba.druid.pool.DruidDataSource
+  security:
+    basic:
+      enabled: false
 
 eureka:
   client:

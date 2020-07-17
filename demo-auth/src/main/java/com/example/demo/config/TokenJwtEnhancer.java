@@ -31,7 +31,6 @@ public class TokenJwtEnhancer implements TokenEnhancer {
                                      OAuth2Authentication oAuth2Authentication) {
         Map<String, Object> additionalInfo = new HashMap<>(8);
         additionalInfo.put("timestamp", System.currentTimeMillis());
-//        additionalInfo.put("license", eastcomProperties.getSecurity().getOauth2().getLicense());
         additionalInfo.put("license", "SLI97");
         Authentication authentication = oAuth2Authentication.getUserAuthentication();
         if (authentication != null

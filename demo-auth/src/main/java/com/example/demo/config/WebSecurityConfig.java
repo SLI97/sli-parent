@@ -48,7 +48,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 //        registry.anyRequest().access("@permissionService.hasPermission(authentication,request)");
         http.authorizeRequests()
                 .antMatchers("/oauth/**").permitAll()
-                .antMatchers("/user/**").permitAll()
+                .antMatchers("/oauth2/**").permitAll()
+//                .antMatchers("/user/**").permitAll()
 //                .antMatchers("/**").permitAll() //让所有人可以访问首页
 //                .antMatchers("/oauth/**").permitAll() //让所有人可以访问首页
 //                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()

@@ -27,11 +27,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
                 .authorizeRequests();
-//        registry.antMatchers("/user/**").permitAll();
-//        registry.antMatchers("/**").permitAll();
         http.authorizeRequests()
-                .antMatchers("/oauth/**").permitAll()
-                .antMatchers("/user/**").permitAll()
+//                .antMatchers("/oauth/**").permitAll()
+//                .antMatchers("/user/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-
-</body>
+    <script th:inline="javascript">
+        var access_token=[[${access_token}]]
+        window.location.href = 'http://sli.com/reload?access_token=' + access_token
+    </script>
 </html>

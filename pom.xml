@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.sli</groupId>
-    <artifactId>demo-parent</artifactId>
+    <artifactId>sli-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
@@ -82,12 +82,12 @@
     </dependencyManagement>
 
     <modules>
-        <module>demo-auth</module>
-        <module>demo-config</module>
-        <module>demo-registry</module>
-        <module>demo-gateway</module>
-        <module>demo-workflow</module>
-        <module>demo-common</module>
+        <module>sli-auth</module>
+        <module>sli-config</module>
+        <module>sli-registry</module>
+        <module>sli-gateway</module>
+        <module>sli-workflow</module>
+        <module>sli-common</module>
     </modules>
 
 </project>

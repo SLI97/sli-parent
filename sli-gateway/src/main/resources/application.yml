@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: demo-gateway
+    name: sli-gateway
 #  cloud:
 #    config:
 #      uri: http://localhost:8888
@@ -40,7 +40,7 @@ ribbon:
   OkToRetryOnAllOperations: false
   eager-load:
     enabled: true
-    clients: demo-auth,demo-registry, demo-config,demo-workflow
+    clients: sli-auth,sli-registry, sli-config,sli-workflow
 
 zuul:
   retryable: true
@@ -54,25 +54,25 @@ zuul:
   routes:
     auth-route:
       path: /uaa/**
-      serviceId: demo-auth
+      serviceId: sli-auth
       stripPrefix: false
       sensitiveHeaders:
 
     registry-route:
       path: /registry/**
-      serviceId: demo-registry
+      serviceId: sli-registry
       stripPrefix: false
       sensitiveHeaders:
 
     config-route:
       path: /config/**
-      serviceId: demo-config
+      serviceId: sli-config
       stripPrefix: false
       sensitiveHeaders:
 
     workflow-route:
       path: /workflow/**
-      serviceId: demo-workflow
+      serviceId: sli-workflow
       stripPrefix: false
       sensitiveHeaders:
 

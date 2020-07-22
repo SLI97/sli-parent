@@ -14,7 +14,7 @@ eureka:
 
 spring:
   application:
-    name: demo-registry
+    name: sli-registry
 #  cloud:
 #    config:
 #      uri: http://localhost:8888

@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: demo-config
+    name: sli-config
   profiles:
     active: native
   cloud:

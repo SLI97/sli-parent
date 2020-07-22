@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: demo-workflow
+    name: sli-workflow
 
 eureka:
   client:

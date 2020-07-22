@@ -18,24 +18,24 @@
 #  routes:
 #    auth-route:
 #      path: /auth/**
-#      serviceId: demo-auth
+#      serviceId: sli-auth
 #      stripPrefix: false
 #      sensitiveHeaders:
 #
 #    registry-route:
 #      path: /registry/**
-#      serviceId: demo-registry
+#      serviceId: sli-registry
 #      stripPrefix: false
 #      sensitiveHeaders:
 #
 #    config-route:
 #      path: /config/**
-#      serviceId: demo-config
+#      serviceId: sli-config
 #      stripPrefix: false
 #      sensitiveHeaders:
 #
 #    workflow-route:
 #      path: /workflow/**
-#      serviceId: demo-workflow
+#      serviceId: sli-workflow
 #      stripPrefix: false
 #      sensitiveHeaders:

@@ -3,25 +3,38 @@ package com.example.demo.config;
 import com.example.demo.service.imp.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import sun.security.util.SecurityConstants;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * OAuth2 认证服务配置
+ *
+ * @author sli
+ */
 @Configuration
 @EnableAuthorizationServer
 public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
@@ -56,9 +69,17 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         clients.withClientDetails(clientDetails());
     }
 
+    /**
+     * 定义授权和令牌端点以及令牌服务
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.authenticationManager(authenticationManager)
+        endpoints
+                // 请求方式
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
+                // 指定token存储位置
+                .tokenStore(tokenStore())
+                .authenticationManager(authenticationManager)
                 // 配置JwtAccessToken转换器
 //                .accessTokenConverter(jwtAccessTokenConverter)
                 // refresh_token需要userDetailsService
@@ -89,5 +110,43 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
     public ClientDetailsService clientDetails() {
         return new JdbcClientDetailsService(dataSource);
+    }
+
+    /**
+     * 自定义生成令牌
+     */
+    @Bean
+    public TokenEnhancer tokenEnhancer()
+    {
+        //返回一个实现了TokenEnhancer接口的匿名内部类对象,lambda表达式写法
+        return (OAuth2AccessToken accessToken, OAuth2Authentication authentication) -> {
+            if (authentication.getUserAuthentication() != null)
+            {
+                Map<String, Object> additionalInformation = new LinkedHashMap<String, Object>();
+                LoginUser user = (LoginUser) authentication.getUserAuthentication().getPrincipal();
+                additionalInformation.put(SecurityConstants.DETAILS_USER_ID, user.getUserId());
+                additionalInformation.put(SecurityConstants.DETAILS_USERNAME, user.getUsername());
+                ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
+            }
+            return accessToken;
+        };
+    }
+
+    @Override
+    public OAuth2AccessToken enhance(OAuth2AccessToken accessToken,
+                                     OAuth2Authentication oAuth2Authentication) {
+        Map<String, Object> additionalInfo = new HashMap<>(8);
+        additionalInfo.put("timestamp", System.currentTimeMillis());
+        additionalInfo.put("license", "SLI97");
+        Authentication authentication = oAuth2Authentication.getUserAuthentication();
+        if (authentication != null
+                && authentication.getPrincipal() instanceof UserDetails) {
+            Object principal = authentication.getPrincipal();
+            additionalInfo.put("username", ((UserDetails) principal).getUsername());
+        }
+
+        ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
+
+        return accessToken;
     }
 }

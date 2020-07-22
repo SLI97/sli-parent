@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 
+import com.example.demo.constant.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class ValidateCodeController {
 
-    private static final String DEFAULT_VALIDATE_CODE_URL_PREFIX = "/auth/code";
-
     @Autowired
     private ValidateCodeProcessorHolder validateCodeProcessorHolder;
     /**
@@ -28,7 +27,7 @@ public class ValidateCodeController {
      * @param type
      * @throws Exception
      */
-    @GetMapping(DEFAULT_VALIDATE_CODE_URL_PREFIX + "/{type}")
+    @GetMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/{type}")
     public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type)
             throws Exception {
         validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));

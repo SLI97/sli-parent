@@ -26,6 +26,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Security 安全认证相关配置
+ * Oauth2依赖于Security 默认情况下WebSecurityConfig执行比ResourceServerConfig优先
+ *
+ * @author sli
+ */
 @Configuration
 @Order(1)
 public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
@@ -36,45 +43,10 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-//        http.cors().and().csrf().disable();
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
-//        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
-//                .authorizeRequests();
-//        registry.antMatchers("/uaa/auth/**").c();
-//        registry.antMatchers("/uaa/user/**").permitAll();
-//        registry.anyRequest().access("@permissionService.hasPermission(authentication,request)");
-        http.authorizeRequests()
-                .antMatchers("/oauth/**").permitAll()
-                .antMatchers("/oauth2/**").permitAll()
-//                .antMatchers("/user/**").permitAll()
-//                .antMatchers("/**").permitAll() //让所有人可以访问首页
-//                .antMatchers("/oauth/**").permitAll() //让所有人可以访问首页
-//                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .anyRequest().authenticated();
-//                .anyRequest()
-//                .access("@permissionService.hasPermission(authentication,request)");
-        //定制请求的授权规则
-//        formAuthenticationConfig.configure(http);
-//        http.formLogin();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-//                .passwordEncoder(passwordEncoder());
-
-        //内存用户验证
-//        auth.inMemoryAuthentication()
-//                .withUser("wang").password("123456").roles("VIP1","VIP2").and()
-//                .withUser("yun").password("123456").roles("VIP3");
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS);
+    @Bean
+    @ConditionalOnMissingBean(PasswordEncoder.class)
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -83,18 +55,29 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Bean
-    @ConditionalOnMissingBean(PasswordEncoder.class)
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+//                .passwordEncoder(passwordEncoder());
     }
 
-//    @Bean
-//    HttpFirewall httpFirewall() {
-//        StrictHttpFirewall firewall = new StrictHttpFirewall();
-//        firewall.setAllowSemicolon(true);
-//        return firewall;
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
+        http.authorizeRequests()
+                .antMatchers("/oauth/**").permitAll()
+                .antMatchers("/oauth2/**").permitAll()
+                .anyRequest().authenticated().and().csrf().disable();;
+//                .anyRequest()
+//                .access("@permissionService.hasPermission(authentication,request)");
+//        formAuthenticationConfig.configure(http);
+    }
+
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(HttpMethod.OPTIONS);
+    }
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 

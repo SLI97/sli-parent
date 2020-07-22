@@ -1,5 +1,7 @@
 package com.sli.config;
 
+import com.sli.common.security.constant.SecurityConstants;
+import com.sli.common.security.domain.LoginUser;
 import com.sli.service.imp.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -115,29 +117,13 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
             if (authentication.getUserAuthentication() != null) {
                 Map<String, Object> additionalInformation = new LinkedHashMap<String, Object>();
                 LoginUser user = (LoginUser) authentication.getUserAuthentication().getPrincipal();
+                additionalInformation.put("timestamp", System.currentTimeMillis());
+                additionalInformation.put("license", "SLI97");
                 additionalInformation.put(SecurityConstants.DETAILS_USER_ID, user.getUserId());
                 additionalInformation.put(SecurityConstants.DETAILS_USERNAME, user.getUsername());
                 ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
             }
             return accessToken;
         };
-    }
-
-    @Override
-    public OAuth2AccessToken enhance(OAuth2AccessToken accessToken,
-                                     OAuth2Authentication oAuth2Authentication) {
-        Map<String, Object> additionalInfo = new HashMap<>(8);
-        additionalInfo.put("timestamp", System.currentTimeMillis());
-        additionalInfo.put("license", "SLI97");
-        Authentication authentication = oAuth2Authentication.getUserAuthentication();
-        if (authentication != null
-                && authentication.getPrincipal() instanceof UserDetails) {
-            Object principal = authentication.getPrincipal();
-            additionalInfo.put("username", ((UserDetails) principal).getUsername());
-        }
-
-        ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
-
-        return accessToken;
     }
 }

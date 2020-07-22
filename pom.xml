@@ -14,10 +14,10 @@
     <groupId>com.sli</groupId>
     <artifactId>sli-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <properties>
-        <sli.version>1.1.0-SNAPSHOT</sli.version>
+        <sli.version>1.1.0.1-SNAPSHOT</sli.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -25,6 +25,7 @@
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <guava.version>26.0-jre</guava.version>
+        <sli-common.version>1.0.1-SNAPSHOT</sli-common.version>
     </properties>
 
     <dependencies>
@@ -42,6 +43,11 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.sli</groupId>
+                <artifactId>sli-common-security</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

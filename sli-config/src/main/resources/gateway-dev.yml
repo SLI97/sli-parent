@@ -7,7 +7,7 @@
 #  client:
 #    register-with-eureka: true
 #    fetch-registry: true
-#    service-url:
+#    com.sli.service-url:
 #      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
 #  instance:
 #    hostname: localhost

@@ -245,6 +245,8 @@
     height: 38px;
     float: right;
     img {
+      width:100%;
+      height:100%;
       cursor: pointer;
       vertical-align: middle;
     }

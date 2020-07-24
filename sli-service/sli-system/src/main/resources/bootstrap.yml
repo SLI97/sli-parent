@@ -1,0 +1,18 @@
+# Spring
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ry-config?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+# Mybatis配置
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.sli
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath:mapper/**/*.xml

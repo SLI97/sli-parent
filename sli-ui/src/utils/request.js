@@ -7,9 +7,9 @@ import { getToken } from '@/utils/auth'
 const service = axios.create({
   // baseURL: 'http://sli.com', // api的base_url
   // baseURL: 'http://192.168.96.160:9999', // api的base_url
-  baseURL: 'http://localhost:9999', // api的base_url
+  baseURL: 'http://localhost:4000', // api的base_url
   timeout: 15000, // 请求超时时间
-  withCredentials: true // 跨域请求，允许保存cookie
+  // withCredentials: true // 跨域请求，允许保存cookie
 })
 
 // request拦截器

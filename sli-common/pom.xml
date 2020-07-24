@@ -12,8 +12,14 @@
     <artifactId>sli-common</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>sli-common-security</module>
+        <module>sli-common-core</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

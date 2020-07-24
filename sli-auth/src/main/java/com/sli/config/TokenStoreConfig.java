@@ -19,7 +19,7 @@ public class TokenStoreConfig {
      * 使用Redis做缓存
      */
 //    @Configuration
-//    @ConditionalOnProperty(prefix = "eastcom.security.oauth2", name = "tokenStore", havingValue = "redis")
+//    @ConditionalOnProperty(prefix = "eastcom.core.oauth2", name = "tokenStore", havingValue = "redis")
     public static class RedisConfig {
 
         @Resource
@@ -37,7 +37,7 @@ public class TokenStoreConfig {
      * 使用jwt时的配置，默认生效
      */
     @Configuration
-//    @ConditionalOnProperty(prefix = "eastcom.security.oauth2", name = "tokenStore", havingValue = "jwt", matchIfMissing = true)
+//    @ConditionalOnProperty(prefix = "eastcom.core.oauth2", name = "tokenStore", havingValue = "jwt", matchIfMissing = true)
     public static class JwtConfig {
 
         @Bean

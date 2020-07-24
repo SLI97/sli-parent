@@ -61,12 +61,12 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable();
         http.authorizeRequests()
+                .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/oauth/**").permitAll()
                 .antMatchers("/oauth2/**").permitAll()
-                .anyRequest().authenticated().and().csrf().disable();;
-//                .anyRequest()
-//                .access("@permissionService.hasPermission(authentication,request)");
-//        formAuthenticationConfig.configure(http);
+                .antMatchers("/token/**").permitAll()
+                .anyRequest().authenticated()
+                .and().csrf().disable();
     }
 
 
@@ -74,39 +74,4 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.OPTIONS);
     }
-
-//    private AntPathMatcher antPathMatcher = new AntPathMatcher();
-
-//    @Component("permissionService")
-//    public class PermissionServiceImpl {
-//
-//        public boolean hasPermission(Authentication authentication,
-//                                     HttpServletRequest request) {
-//            if (HttpMethod.OPTIONS.name().equalsIgnoreCase(request.getMethod())) {
-//                return true;
-//            }
-////            List<String> currentRoleList = SecurityUtils.getCurrentRoles();
-////            Authentication authentication = SecurityContextHolder.getContext()
-////                    .getAuthentication();
-//            String requestURI = request.getRequestURI();
-//
-//            System.out.println(requestURI);
-//
-//            List<String> urls = new ArrayList<>();
-////            urls.add("/uaa/auth/login");
-//
-////            if (ObjectUtils.isEmpty(currentRoleList)) {
-////                System.out.println("权限列表为空：username={}");
-////                return false;
-////            }
-//
-//            for (String url : urls) {
-//                if (antPathMatcher.match(url, requestURI)) {
-//                    System.out.println("有着路径！");
-//                    return true;
-//                }
-//            }
-//            return false;
-//        }
-//    }
 }

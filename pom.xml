@@ -25,29 +25,20 @@
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <guava.version>26.0-jre</guava.version>
+        <spring-boot.mybatis>2.1.2</spring-boot.mybatis>
         <sli-common.version>1.0.1-SNAPSHOT</sli-common.version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.sli</groupId>
-                <artifactId>sli-common-security</artifactId>
+                <artifactId>sli-common-core</artifactId>
                 <version>1.0.1-SNAPSHOT</version>
             </dependency>
+
+            <!-- SpringCloud 微服务 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -55,6 +46,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- SpringCloud Alibaba 微服务 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.0.2.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-config</artifactId>
@@ -64,6 +65,13 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
                 <version>2.0.2.RELEASE</version>
+            </dependency>
+
+            <!-- Mybatis 依赖配置 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${spring-boot.mybatis}</version>
             </dependency>
 
             <!--基本工具 -->
@@ -94,6 +102,7 @@
         <module>sli-gateway</module>
         <module>sli-workflow</module>
         <module>sli-common</module>
+        <module>sli-service</module>
     </modules>
 
 </project>

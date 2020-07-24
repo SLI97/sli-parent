@@ -1,7 +1,7 @@
 package com.sli.config;
 
-import com.sli.common.security.constant.SecurityConstants;
-import com.sli.common.security.domain.LoginUser;
+import com.sli.common.core.constant.SecurityConstants;
+import com.sli.common.core.domain.LoginUser;
 import com.sli.service.imp.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

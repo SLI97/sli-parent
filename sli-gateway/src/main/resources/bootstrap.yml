@@ -1,0 +1,152 @@
+# Tomcat
+server:
+  port: 4000
+#  servlet:
+#    context-path: /gateway
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: sli-gateway
+  profiles:
+    # 环境配置
+    active: dev
+  main:
+    # 开启重名Bean覆盖
+    allow-bean-definition-overriding: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+#    password: eastcomsfnscp
+    timeout: 5000ms
+    jedis:
+      pool:
+        max-active: 100
+        max-wait: -1ms
+        max-idle: 100
+        min-idle: 1
+  sleuth:
+    enabled: true
+    http:
+      legacy:
+        enabled: true
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: localhost:8848
+#      config:
+#        # 配置中心地址
+#        server-addr: localhost:8848
+#        # 配置文件格式
+#        file-extension: yml
+#        #命名空间ID  默认 public
+#        #namespace: 如8a1f90e0-2c31-4bd0-a096-7a78c3591f70
+#        # 分组 ，默认 DEFAULT_GROUP
+#        #group: DEFAULT_GROUP
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowedOrigins: "*"
+            allowedMethods: "*"
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+      - id: sli-auth
+        uri: lb://sli-auth
+        predicates:
+        - Path=/uaa/**
+        filters:
+        - StripPrefix=1
+#        - SwaggerHeaderFilter
+
+      - id: sli-workflow
+        uri: lb://sli-workflow
+        predicates:
+        - Path=/workflow/**
+        filters:
+        - StripPrefix=1
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      password: ${CONFIG_SERVICE_PASSWORD:password}
+#      username: user
+#      name: gateway
+#      profile: ${spring.profiles.active:dev}
+#      fail-fast: true #是否启动快速失败功能，功能开启则优先判断config server是否正常
+#          retry:
+#            initial-interval: 1000 #最初重试间隔为 1000 毫秒
+#            max-attempts: 6 #最多重试 6 次
+#            max-interval: 2000 #最长重试间隔为 2000 毫秒
+#            multiplier: 1.1 #每次重试失败后，重试间隔所增加的倍数
+#      label: ${spring.profiles.active:master}
+
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#    instance-id: sli_eureka:${spring.application.name}:${server.port}
+
+#ribbon:
+#  ReadTimeout: 50000
+#  ConnectTimeout: 50000
+#  MaxAutoRetries: 1
+#  MaxAutoRetriesNextServer: 1
+#  OkToRetryOnAllOperations: false
+#  eager-load:
+#    enabled: true
+#    clients: sli-auth,sli-registry, sli-config,sli-workflow
+
+
+#zuul:
+#  retryable: true
+#  host:
+#    connect-timeout-millis: 60000
+#    socket-timeout-millis: 60000
+#  forceOriginalQueryStringEncoding: true
+#  AuthHeaderFilter:   #配置过滤器是否打开
+#    pre:
+#      disable: false
+#  routes:
+#    auth-route:
+#      path: /uaa/**
+#      serviceId: sli-auth
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#    registry-route:
+#      path: /registry/**
+#      serviceId: sli-registry
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#    config-route:
+#      path: /config/**
+#      serviceId: sli-config
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#    workflow-route:
+#      path: /workflow/**
+#      serviceId: sli-workflow
+#      stripPrefix: false
+#      sensitiveHeaders:
+#
+#  add-proxy-headers: true
+#  add-host-header: true

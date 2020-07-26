@@ -1,0 +1,59 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    #    password: eastcomsfnscp
+    timeout: 5000ms
+    jedis:
+      pool:
+        max-active: 100
+        max-wait: -1ms
+        max-idle: 100
+        min-idle: 1
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowedOrigins: "*"
+            allowedMethods: "*"
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        # 认证中心
+        - id: sli-auth
+          uri: lb://sli-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            # 验证码处理
+            - ValidateCodeFilter=true
+            - StripPrefix=1
+        # 代码生成
+#        - id: ruoyi-gen
+#          uri: lb://ruoyi-gen
+#          predicates:
+#            - Path=/code/**
+#          filters:
+#            - StripPrefix=1
+        # 定时任务
+#        - id: ruoyi-job
+#          uri: lb://ruoyi-job
+#          predicates:
+#            - Path=/schedule/**
+#          filters:
+#            - StripPrefix=1
+        # 系统模块
+        - id: sli-system
+          uri: lb://sli-system
+          predicates:
+            - Path=/system/**
+          filters:
+#            - name: BlackListUrlFilter
+#              args:
+#                blacklistUrl:
+#                  - /user/info/*
+            - StripPrefix=1

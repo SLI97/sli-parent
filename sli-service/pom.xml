@@ -12,7 +12,7 @@
     <artifactId>sli-service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>sli-system</module>
+        <module>sli-service-system</module>
     </modules>
 
 

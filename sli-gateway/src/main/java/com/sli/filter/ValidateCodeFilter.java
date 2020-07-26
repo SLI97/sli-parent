@@ -17,15 +17,15 @@ import reactor.core.publisher.Mono;
 /**
  * 验证码过滤器
  *
- * @author ruoyi
+ * @author sli
  */
 @Component
 public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
 {
-    private final static String AUTH_URL = "/oauth/token";
-
     @Autowired
     private ValidateCodeService validateCodeService;
+
+    private final static String AUTH_URL = "/oauth/token";
 
     private static final String BASIC_ = "Basic ";
 
@@ -38,6 +38,8 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
     {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
+
+            System.out.println(request.getURI().getPath());
 
             // 非登录请求，不处理
             if (!StringUtils.containsIgnoreCase(request.getURI().getPath(), AUTH_URL))

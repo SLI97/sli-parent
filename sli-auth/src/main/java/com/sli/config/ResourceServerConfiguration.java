@@ -15,8 +15,8 @@ import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurity
 @Order(101)
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    @Autowired
-    private OAuth2WebSecurityExpressionHandler pcSecurityExpressionHandler;
+//    @Autowired
+//    private OAuth2WebSecurityExpressionHandler pcSecurityExpressionHandler;
 
     @Autowired
     private FormAuthenticationConfig formAuthenticationConfig;
@@ -42,8 +42,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         formAuthenticationConfig.configure(http);
     }
 
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) {
-        resources.expressionHandler(pcSecurityExpressionHandler);
-    }
+//    @Override
+//    public void configure(ResourceServerSecurityConfigurer resources) {
+//        resources.expressionHandler(pcSecurityExpressionHandler);
+//    }
 }

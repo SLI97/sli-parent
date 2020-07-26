@@ -20,19 +20,19 @@ public class TokenStoreConfig {
      */
 //    @Configuration
 //    @ConditionalOnProperty(prefix = "eastcom.core.oauth2", name = "tokenStore", havingValue = "redis")
-    public static class RedisConfig {
-
-        @Resource
-        private RedisConnectionFactory redisConnectionFactory;
-
-        @Bean
-        public TokenStore redisTokenStore() {
-            RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
-//            tokenStore.setPrefix(CacheConstants.OAUTH_ACCESS);
-            return tokenStore;
-        }
-
-    }
+//    public static class RedisConfig {
+//
+//        @Resource
+//        private RedisConnectionFactory redisConnectionFactory;
+//
+//        @Bean
+//        public TokenStore redisTokenStore() {
+//            RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
+////            tokenStore.setPrefix(CacheConstants.OAUTH_ACCESS);
+//            return tokenStore;
+//        }
+//
+//    }
     /**
      * 使用jwt时的配置，默认生效
      */

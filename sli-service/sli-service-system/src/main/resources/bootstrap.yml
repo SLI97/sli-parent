@@ -1,0 +1,27 @@
+# Tomcat
+server:
+  port: 9001
+#  servlet:
+#    context-path: /system
+
+# Spring
+spring:
+  application:
+    name: sli-system
+  profiles:
+    # 环境配置
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: localhost:8848
+  #      config:
+  #        # 配置中心地址
+  #        server-addr: localhost:8848
+  #        # 配置文件格式
+  #        file-extension: yml
+  #        #命名空间ID  默认 public
+  #        #namespace: 如8a1f90e0-2c31-4bd0-a096-7a78c3591f70
+  #        # 分组 ，默认 DEFAULT_GROUP
+  #        #group: DEFAULT_GROUP

@@ -3,7 +3,7 @@ package com.sli.common.core.constant;
 /**
  * 用户常量信息
  *
- * @author ruoyi
+ * @author sli
  */
 public class UserConstants
 {

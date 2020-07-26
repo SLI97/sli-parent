@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
-            <exclusions>
+<!--            <exclusions>-->
                 <!--<exclusion>-->
                     <!--<groupId>org.springframework.boot</groupId>-->
                     <!--<artifactId>spring-boot-starter-web</artifactId>-->
@@ -61,7 +61,7 @@
                     <!--<groupId>org.springframework.boot</groupId>-->
                     <!--<artifactId>spring-boot-starter-webflux</artifactId>-->
                 <!--</exclusion>-->
-            </exclusions>
+<!--            </exclusions>-->
         </dependency>
         <!--<dependency>-->
             <!--<groupId>org.springframework.cloud</groupId>-->
@@ -83,18 +83,14 @@
             <!--<groupId>org.springframework.cloud</groupId>-->
             <!--<artifactId>spring-cloud-starter-oauth2</artifactId>-->
         <!--</dependency>-->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
         <!--<dependency>-->
         <!--<groupId>org.slf4j</groupId>-->
         <!--<artifactId>slf4j-log4j12</artifactId>-->
         <!--</dependency>-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -114,8 +110,6 @@
         <dependency>
             <groupId>com.sli</groupId>
             <artifactId>sli-common-core</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

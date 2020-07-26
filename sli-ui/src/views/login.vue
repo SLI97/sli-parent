@@ -98,7 +98,7 @@
       }
     },
     created() {
-      console.log("login~")
+      console.log("created~")
       this.changeWebTitle()
       this.getCode()
       this.getCookie()
@@ -133,15 +133,15 @@
               Cookies.remove("password");
               Cookies.remove('rememberMe');
             }
-            // this.$store
-            // 	.dispatch("Login", this.loginForm)
-            // 	.then(() => {
-            // 		this.$router.push({ path: this.redirect || "/" });
-            // 	})
-            // 	.catch(() => {
-            // 		this.loading = false;
-            // 		this.getCode();
-            // 	});
+            this.$store
+            	.dispatch("Login", this.loginForm)
+            	.then(() => {
+            		this.$router.push({ path: this.redirect || "/" });
+            	})
+            	.catch(() => {
+            		this.loading = false;
+            		this.getCode();
+            	});
           }
         });
       },

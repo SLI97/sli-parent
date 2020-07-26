@@ -3,7 +3,7 @@ package com.sli.common.core.exception;
 /**
  * 自定义异常
  *
- * @author ruoyi
+ * @author sli
  */
 public class CustomException extends RuntimeException
 {

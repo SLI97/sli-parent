@@ -1,35 +1,32 @@
 server:
   port: 8085
-  servlet:
-    context-path: /uaa
+#  servlet:
+#    context-path: /uaa
 
-#����Դ����
-#ָ������
 spring:
   application:
     name: sli-auth
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mydemo
+    url: jdbc:mysql://localhost:3306/ry-config?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
-    password: GUI123ZONG
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    port: 6379
+#    password:
   security:
     basic:
       enabled: false
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-    instance-id: sli_eureka:${spring.application.name}:${server.port}
-
-#Mybatis������ ����mapper�ļ��ĵ�ַ
-#mybatis-plus.mapper-locations=classpath:/mappers/*Mapper.xml
-#mybatis.mapper-locations=classpath:/mappers/*Mapper.xml
-#mybatis.type-aliases-package=com.example.demo.entity
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:8761/registry/eureka/
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#    instance-id: sli_eureka:${spring.application.name}:${server.port}

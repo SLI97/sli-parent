@@ -1,7 +1,8 @@
 package com.sli.config;
 
 import com.sli.common.core.constant.SecurityConstants;
-import com.sli.common.core.domain.LoginUser;
+import com.sli.domain.LoginUser;
+import com.sli.service.RedisClientDetailsService;
 import com.sli.service.imp.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -68,7 +69,8 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
      * 声明 ClientDetails实现
      */
     public ClientDetailsService clientDetailsService() {
-        return new JdbcClientDetailsService(dataSource);
+//        return new JdbcClientDetailsService(dataSource);
+        return new RedisClientDetailsService(dataSource);
     }
 
 

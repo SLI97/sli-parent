@@ -30,7 +30,7 @@ import javax.annotation.Resource;
 import java.net.URLEncoder;
 import java.util.Map;
 
-@Component("RouterFunctionConfiguration")
+//@Component("RouterFunctionConfiguration")
 public class AuthHeaderFilter implements GlobalFilter, Ordered {
     private static final Logger logger = LoggerFactory.getLogger(AuthHeaderFilter.class);
     private static final String BEARER_TOKEN_TYPE = "Bearer ";
@@ -42,29 +42,29 @@ public class AuthHeaderFilter implements GlobalFilter, Ordered {
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         logger.info("first pre filter");
 
-        if (token == null || token.isEmpty()) {
-            ServerHttpResponse response = exchange.getResponse();
-
-            // 封装错误信息
-            Map<String, Object> responseData = Maps.newHashMap();
-            responseData.put("code", 401);
-            responseData.put("message", "非法请求");
-            responseData.put("cause", "Token is empty");
-
-            try {
-                // 将信息转换为 JSON
-                ObjectMapper objectMapper = new ObjectMapper();
-                byte[] data = objectMapper.writeValueAsBytes(responseData);
-
-                // 输出错误信息到页面
-                DataBuffer buffer = response.bufferFactory().wrap(data);
-                response.setStatusCode(HttpStatus.UNAUTHORIZED);
-                response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
-                return response.writeWith(Mono.just(buffer));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-        }
+//        if (token == null || token.isEmpty()) {
+//            ServerHttpResponse response = exchange.getResponse();
+//
+//            // 封装错误信息
+//            Map<String, Object> responseData = Maps.newHashMap();
+//            responseData.put("code", 401);
+//            responseData.put("message", "非法请求");
+//            responseData.put("cause", "Token is empty");
+//
+//            try {
+//                // 将信息转换为 JSON
+//                ObjectMapper objectMapper = new ObjectMapper();
+//                byte[] data = objectMapper.writeValueAsBytes(responseData);
+//
+//                // 输出错误信息到页面
+//                DataBuffer buffer = response.bufferFactory().wrap(data);
+//                response.setStatusCode(HttpStatus.UNAUTHORIZED);
+//                response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
+//                return response.writeWith(Mono.just(buffer));
+//            } catch (JsonProcessingException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         return chain.filter(exchange);
     }

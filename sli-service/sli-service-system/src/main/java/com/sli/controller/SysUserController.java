@@ -98,7 +98,7 @@ public class SysUserController extends BaseController
         SysUser sysUser = userService.selectUserByUserName(username);
         if (StringUtils.isNull(sysUser))
         {
-            return R.fail("用户名或密码错误");
+            return R.fail("用户名或密码错误-userController");
         }
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(sysUser.getUserId());

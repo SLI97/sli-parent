@@ -1,3 +1,21 @@
+# 认证配置
+security:
+  oauth2:
+    client:
+      client-id: ruoyi123
+      client-secret: 123456
+      scope: server
+#    resource:
+#      loadBalanced: true
+#      token-info-uri: http://sli-auth/oauth/check_token
+    ignore:
+      urls:
+      - /v2/api-docs
+      - /actuator/**
+      - /user/info/*
+      - /operlog
+      - /logininfor
+
 spring:
   redis:
     host: 127.0.0.1

@@ -69,11 +69,6 @@
 
         <dependency>
             <groupId>com.sli</groupId>
-            <artifactId>sli-common-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sli</groupId>
             <artifactId>sli-common-security</artifactId>
         </dependency>
 <!--        <dependency>-->

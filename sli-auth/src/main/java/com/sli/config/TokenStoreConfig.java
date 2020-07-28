@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 
 import javax.annotation.Resource;
 
-@Configuration
+//@Configuration
 public class TokenStoreConfig {
 
     /**
@@ -36,16 +36,16 @@ public class TokenStoreConfig {
     /**
      * 使用jwt时的配置，默认生效
      */
-    @Configuration
+//    @Configuration
 //    @ConditionalOnProperty(prefix = "eastcom.core.oauth2", name = "tokenStore", havingValue = "jwt", matchIfMissing = true)
     public static class JwtConfig {
 
-        @Bean
+//        @Bean
         public TokenStore jwtTokenStore() {
             return new JwtTokenStore(jwtAccessTokenConverter());
         }
 
-        @Bean
+//        @Bean
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
             converter.setSigningKey("sli");

@@ -31,7 +31,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         R<UserInfo> userResult = remoteUserService.getUserInfo(username);
-        System.out.println(userResult);
         checkUser(userResult, username);
         return getUserDetails(userResult);
 

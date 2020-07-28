@@ -12,9 +12,9 @@ spring:
   profiles:
     # 环境配置
     active: dev
-  main:
-    # 开启重名Bean覆盖
-    allow-bean-definition-overriding: true
+#  main:
+#    # 开启重名Bean覆盖
+#    allow-bean-definition-overriding: true
   sleuth:
     enabled: true
     http:
@@ -34,46 +34,7 @@ spring:
 #        #namespace: 如8a1f90e0-2c31-4bd0-a096-7a78c3591f70
 #        # 分组 ，默认 DEFAULT_GROUP
 #        #group: DEFAULT_GROUP
-#    gateway:
-#      globalcors:
-#        corsConfigurations:
-#          '[/**]':
-#            allowedHeaders: "*"
-#            allowedOrigins: "*"
-#            allowedMethods: "*"
-#      discovery:
-#        locator:
-#          lowerCaseServiceId: true
-#          enabled: true
-#      routes:
-#      - id: sli-auth
-#        uri: lb://sli-auth
-#        predicates:
-#        - Path=/auth/**
-#        filters:
-#          # 验证码处理
-#          - ValidateCodeFilter
-#          - StripPrefix=1
-#
-#      - id: sli-system
-#        uri: lb://sli-system
-#        predicates:
-#          - Path=/system/**
-#        filters:
-#          - StripPrefix=1
-#
-#      - id: sli-workflow
-#        uri: lb://sli-workflow
-#        predicates:
-#        - Path=/workflow/**
-#        filters:
-#        - StripPrefix=1
-#
-#management:
-#  endpoint:
-#    web:
-#      exposure:
-#        include: "*"
+
 #  cloud:
 #    config:
 #      uri: http://localhost:8888

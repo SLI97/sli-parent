@@ -33,6 +33,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
     @Autowired
     private OAuth2ClientProperties oAuth2ClientProperties;
 
+    @Autowired
+    private AuthIgnoreConfig authIgnoreConfig;
+//
+//    @Autowired
+//    private RemoteTokenServices remoteTokenServices;
+
 //    @Bean
 //    public AuthIgnoreConfig authIgnoreConfig()
 //    {
@@ -48,7 +54,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
         return restTemplate;
     }
 
-    @Bean
+//    @Bean
     public ResourceServerTokenServices tokenServices()
     {
         RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
@@ -70,7 +76,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
                 .authorizeRequests();
         // 不登录可以访问
-//        authIgnoreConfig().getUrls().forEach(url -> registry.antMatchers(url).permitAll());
+        authIgnoreConfig.getUrls().forEach(url -> registry.antMatchers(url).permitAll());
         registry.anyRequest().authenticated();
     }
 

@@ -3,15 +3,6 @@
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
-//import org.springframework.http.HttpMethod;
-//import org.springframework.core.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.core.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-//import org.springframework.core.core.Authentication;
-//import org.springframework.core.oauth2.config.annotation.web.configuration.EnableResourceServer;
-//import org.springframework.core.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-//import org.springframework.core.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-//import org.springframework.core.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
-//import org.springframework.stereotype.Component;
 //import org.springframework.util.AntPathMatcher;
 //
 //import javax.annotation.Resource;
@@ -19,8 +10,8 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-////@Configuration
-////@EnableResourceServer
+//@Configuration
+//@EnableResourceServer
 //public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 //
 //    @Resource
@@ -43,8 +34,8 @@
 //        registry.antMatchers("/uaa/**").permitAll();
 //        registry.antMatchers("/**").permitAll();
 ////        registry.antMatchers("/hello").permitAll();
-//        registry.anyRequest()
-//                .access("@permissionService.hasPermission(authentication,request)");
+////        registry.anyRequest()
+////                .access("@permissionService.hasPermission(authentication,request)");
 //    }
 //
 //    @Override
@@ -58,38 +49,5 @@
 //        OAuth2WebSecurityExpressionHandler expressionHandler = new OAuth2WebSecurityExpressionHandler();
 //        expressionHandler.setApplicationContext(applicationContext);
 //        return expressionHandler;
-//    }
-//
-//    @Component("permissionService")
-//    public class PermissionServiceImpl {
-//
-//        public boolean hasPermission(Authentication authentication,
-//                                     HttpServletRequest request) {
-//            if (HttpMethod.OPTIONS.name().equalsIgnoreCase(request.getMethod())) {
-//                return true;
-//            }
-////            List<String> currentRoleList = SecurityUtils.getCurrentRoles();
-////            Authentication authentication = SecurityContextHolder.getContext()
-////                    .getAuthentication();
-//            String requestURI = request.getRequestURI();
-//
-//            System.out.println(requestURI);
-//
-//            List<String> urls = new ArrayList<>();
-////            urls.add("/uaa/auth/login");
-//
-////            if (ObjectUtils.isEmpty(currentRoleList)) {
-////                System.out.println("权限列表为空：username={}");
-////                return false;
-////            }
-//
-//            for (String url : urls) {
-//                if (antPathMatcher.match(url, requestURI)) {
-//                    System.out.println("有着路径！");
-//                    return true;
-//                }
-//            }
-//            return false;
-//        }
 //    }
 //}

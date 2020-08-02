@@ -1,6 +1,5 @@
 package com.sli.config;
 
-import com.sli.util.wrapper.JsonBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -37,7 +36,7 @@ public class FormAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
         }
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper
-                .writeValueAsString(JsonBuilder.error(tipMessage)));
+//        response.getWriter().write(objectMapper
+//                .writeValueAsString(JsonBuilder.error(tipMessage)));
     }
 }

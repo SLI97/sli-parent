@@ -1,6 +1,6 @@
 package com.sli.mapper;
 
-import com.sli.domain.SysDept;
+import com.sli.api.system.domain.SysDept;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,10 +1,10 @@
 package com.sli.service.impl;
 
 import com.sli.common.core.constant.UserConstants;
-import com.sli.utils.SecurityUtils;
+import com.sli.common.security.utils.SecurityUtils;
 import com.sli.common.core.utils.StringUtils;
 import com.sli.entity.SysMenu;
-import com.sli.domain.SysUser;
+import com.sli.api.system.domain.SysUser;
 import com.sli.entity.vo.MetaVo;
 import com.sli.entity.vo.RouterVo;
 import com.sli.entity.vo.TreeSelect;

@@ -1,6 +1,6 @@
 package com.sli.mapper;
 
-import com.sli.domain.SysRole;
+import com.sli.api.system.domain.SysRole;
 
 import java.util.List;
 

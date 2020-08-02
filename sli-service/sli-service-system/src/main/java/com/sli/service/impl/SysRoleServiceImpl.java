@@ -4,7 +4,7 @@ import com.sli.common.core.constant.UserConstants;
 import com.sli.common.core.exception.CustomException;
 import com.sli.common.core.utils.SpringUtils;
 import com.sli.common.core.utils.StringUtils;
-import com.sli.domain.SysRole;
+import com.sli.api.system.domain.SysRole;
 import com.sli.entity.SysRoleDept;
 import com.sli.entity.SysRoleMenu;
 import com.sli.mapper.SysRoleDeptMapper;

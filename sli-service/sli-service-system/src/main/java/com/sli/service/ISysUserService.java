@@ -1,6 +1,6 @@
 package com.sli.service;
 
-import com.sli.domain.SysUser;
+import com.sli.api.system.domain.SysUser;
 
 import java.util.List;
 

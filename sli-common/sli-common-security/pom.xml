@@ -24,6 +24,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- 指明版本，解决redis存储出现的问题：java.lang.NoSuchMethodError:
+        org.springframework.data.redis.connection.RedisConnection.set([B[B)V问题 -->
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>

@@ -1,6 +1,6 @@
 package com.sli.service.impl;
 
-import com.sli.domain.SysUser;
+import com.sli.api.system.domain.SysUser;
 import com.sli.service.ISysMenuService;
 import com.sli.service.ISysPermissionService;
 import com.sli.service.ISysRoleService;

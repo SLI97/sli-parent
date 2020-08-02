@@ -1,6 +1,6 @@
 package com.sli.service;
 
-import com.sli.domain.SysRole;
+import com.sli.api.system.domain.SysRole;
 
 import java.util.List;
 import java.util.Set;

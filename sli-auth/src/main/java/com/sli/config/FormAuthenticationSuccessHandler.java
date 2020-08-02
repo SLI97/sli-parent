@@ -1,7 +1,6 @@
 package com.sli.config;
 
 import com.sli.util.RequestUtils;
-import com.sli.util.wrapper.JsonBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import org.springframework.security.core.Authentication;
@@ -92,7 +91,7 @@ public class FormAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
 //        response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 //        response.addHeader("Access-Control-Request-Headers",
 //                "Origin, X-Requested-With, content-Type, Accept, Authorization, currentUserToken");
-        response.getWriter()
-                .write((objectMapper.writeValueAsString(JsonBuilder.ok(token))));
+//        response.getWriter()
+//                .write((objectMapper.writeValueAsString(JsonBuilder.ok(token))));
     }
 }

@@ -1,7 +1,7 @@
 package com.sli.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.sli.domain.SysDept;
+import com.sli.api.system.domain.SysDept;
 import com.sli.entity.SysMenu;
 
 import java.io.Serializable;

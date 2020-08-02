@@ -1,9 +1,10 @@
 import {login, logout, getInfo} from '@/api/login'
-import {getToken, setToken, removeToken} from '@/utils/auth'
+import {getToken, getRefreshToken, setToken, setRefreshToken, setExpiresIn, removeToken} from '@/utils/auth'
 
 const user = {
 	state: {
 		token: getToken(),
+		refresh_token: getRefreshToken(),
 		name: '',
 		avatar: '',
 		roles: [],
@@ -13,6 +14,12 @@ const user = {
 	mutations: {
 		SET_TOKEN: (state, token) => {
 			state.token = token
+		},
+		SET_EXPIRES_IN: (state, time) => {
+			state.expires_in = time
+		},
+		SET_REFRESH_TOKEN: (state, token) => {
+			state.refresh_token = token
 		},
 		SET_NAME: (state, name) => {
 			state.name = name
@@ -37,8 +44,16 @@ const user = {
 			const uuid = userInfo.uuid
 			return new Promise((resolve, reject) => {
 				login(username, password, code, uuid).then(res => {
-					setToken(res.token)
-					commit('SET_TOKEN', res.token)
+					// setToken(res.token)
+					// commit('SET_TOKEN', res.token)
+
+					setToken(res.access_token)
+					commit('SET_TOKEN', res.access_token)
+					setRefreshToken(res.refresh_token)
+					commit('SET_REFRESH_TOKEN', res.refresh_token)
+					setExpiresIn(res.expires_in)
+					commit('SET_EXPIRES_IN', res.expires_in)
+
 					resolve()
 				}).catch(error => {
 					reject(error)
@@ -49,82 +64,7 @@ const user = {
 		// 获取用户信息
 		GetInfo({commit, state}) {
 			return new Promise((resolve, reject) => {
-				// getInfo(state.token).then(res => {
-				const res = {
-					"msg": "操作成功",
-					"code": 200,
-					"permissions": ["*:*:*"],
-					"roles": ["admin"],
-					"user": {
-						"searchValue": null,
-						"createBy": "admin",
-						"createTime": "2018-03-16 11:33:00",
-						"updateBy": null,
-						"updateTime": null,
-						"remark": "管理员",
-						"dataScope": null,
-						"params": {},
-						"userId": 1,
-						"deptId": 103,
-						"userName": "admin",
-						"nickName": "若依",
-						"email": "ry@163.com",
-						"phonenumber": "15888888888",
-						"sex": "1",
-						"avatar": "",
-						"password": "$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2",
-						"salt": null,
-						"status": "0",
-						"delFlag": "0",
-						"loginIp": "127.0.0.1",
-						"loginDate": "2018-03-16T11:33:00.000+0800",
-						"dept": {
-							"searchValue": null,
-							"createBy": null,
-							"createTime": null,
-							"updateBy": null,
-							"updateTime": null,
-							"remark": null,
-							"dataScope": null,
-							"params": {},
-							"deptId": 103,
-							"parentId": 101,
-							"ancestors": null,
-							"deptName": "研发部门",
-							"orderNum": "1",
-							"leader": "若依",
-							"phone": null,
-							"email": null,
-							"status": "0",
-							"delFlag": null,
-							"parentName": null,
-							"children": []
-						},
-						"roles": [{
-							"searchValue": null,
-							"createBy": null,
-							"createTime": null,
-							"updateBy": null,
-							"updateTime": null,
-							"remark": null,
-							"dataScope": "1",
-							"params": {},
-							"roleId": 1,
-							"roleName": "管理员",
-							"roleKey": "admin",
-							"roleSort": "1",
-							"status": "0",
-							"delFlag": null,
-							"flag": false,
-							"menuIds": null,
-							"deptIds": null,
-							"admin": true
-						}],
-						"roleIds": null,
-						"postIds": null,
-						"admin": true
-					}
-				}
+				getInfo(state.token).then(res => {
 				const user = res.user
 				const avatar = user.avatar == "" ? require("@/assets/image/profile.jpg") : process.env.VUE_APP_BASE_API + user.avatar;
 				if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
@@ -136,9 +76,9 @@ const user = {
 				commit('SET_NAME', user.userName)
 				commit('SET_AVATAR', avatar)
 				resolve(res)
-				// }).catch(error => {
-				// 	reject(error)
-				// })
+				}).catch(error => {
+					reject(error)
+				})
 			})
 		},
 

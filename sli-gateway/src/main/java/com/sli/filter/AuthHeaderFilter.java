@@ -1,34 +1,12 @@
 package com.sli.filter;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.netflix.zuul.ZuulFilter;
-//import com.netflix.zuul.context.RequestContext;
-import com.google.common.collect.Maps;
-import com.sun.org.apache.xml.internal.security.keys.KeyUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpResponse;
-//import org.springframework.core.core.Authentication;
-//import org.springframework.core.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import javax.annotation.Resource;
-//import javax.servlet.http.HttpServletRequest;
-import java.net.URLEncoder;
-import java.util.Map;
 
 //@Component("RouterFunctionConfiguration")
 public class AuthHeaderFilter implements GlobalFilter, Ordered {

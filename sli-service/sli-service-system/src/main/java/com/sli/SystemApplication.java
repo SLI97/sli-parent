@@ -3,6 +3,7 @@ package com.sli;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * 系统模块
@@ -10,6 +11,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
  * @author sli
  */
 @MapperScan("com.sli.mapper")
+@EnableFeignClients
 @SpringCloudApplication
 public class SystemApplication
 {

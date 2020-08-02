@@ -66,6 +66,6 @@ security:
       urls:
       - /v2/api-docs
       - /actuator/**
-      - /user/info/*
+      - /user/info/*   #userDetailServer通过远程调用RemoteUserService的方法调用userController的方法获取用户嘻嘻
       - /operlog
       - /logininfor

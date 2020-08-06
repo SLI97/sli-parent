@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 //@EnableGlobalMethodSecurity(jsr250Enabled = true) // 控制权限注解 @RolesAllowed({"ROOT"}) @PermitAll @DenyAll
 //@EnableGlobalMethodSecurity(securedEnabled = true) // 控制权限注解 @Secured({ "ROLE_DBA", "ROLE_ADMIN" })
-@EnableGlobalMethodSecurity(prePostEnabled = true) // 控制权限注解
+//@EnableGlobalMethodSecurity(prePostEnabled = true) // 控制权限注解
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()              // 表单方式
                 .and()
                 .authorizeRequests()  // 授权配置
-                .antMatchers("/druid/**").permitAll()
+                .antMatchers("/**").permitAll()
 //                .antMatchers("/user/**").hasRole("USER")
                 .anyRequest()         // 所有请求
                 .authenticated()    // 都需要认证

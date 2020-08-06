@@ -2,11 +2,20 @@ package com.sli;
 
 //import com.sli.common.core.domain.BaseEntity;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sli.annotation.SysLog;
 //import com.sli.dao.TestDao;
 //import com.sli.entity.MyTest;
 //import com.sli.service.CacheService;
 //import com.sli.service.TestService;
+import com.sli.common.core.constant.HttpStatus;
+import com.sli.common.core.web.page.PageDomain;
+import com.sli.common.core.web.page.TableDataInfo;
+import com.sli.common.core.web.page.TableSupport;
+import com.sli.entity.User;
+import com.sli.mapper.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -15,10 +24,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
@@ -26,6 +32,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Wrapper;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,6 +50,9 @@ public class WorkflowApplication {
 
 //        @Autowired
 //        private CacheService cacheService;
+
+        @Autowired
+        private UserMapper userMapper;
 
         @SysLog("我是hello控制器")
         @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ROOT')")
@@ -86,15 +96,21 @@ public class WorkflowApplication {
 //            testService.add(t);
 //        }
 //
-//        @RequestMapping("/user/update")
-//        public void update() throws Exception {
-//            MyTest t = new MyTest();
-//            t.setAge(180);
-//            t.setInhere(false);
-//            t.setName("昴先生111");
-//            t.setId(1L);
-//            testService.update(t);
-//        }
+        @GetMapping("/user/select")
+        public TableDataInfo select() throws Exception {
+//            User user = new User();
+//            user.setName(name);
+            QueryWrapper<User> wrapper = new QueryWrapper<>();
+//            wrapper.eq("name",user.getName());
+            PageHelper.startPage(1, 2);
+            List<User> list = userMapper.selectList(wrapper);
+            TableDataInfo rspData = new TableDataInfo();
+            rspData.setCode(HttpStatus.SUCCESS);
+            rspData.setRows(list);
+            rspData.setMsg("查询成功");
+            rspData.setTotal(new PageInfo(list).getTotal());
+            return rspData;
+        }
     }
 
 }

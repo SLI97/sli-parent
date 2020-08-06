@@ -1,6 +1,10 @@
 package com.sli;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sli.common.core.constant.HttpStatus;
+import com.sli.common.core.web.page.TableDataInfo;
 import com.sli.entity.MyTest;
 import com.sli.entity.User;
 import com.sli.mapper.UserMapper;
@@ -24,7 +28,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-//@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootJdbcApplicationTests {
 //    @Autowired
@@ -125,6 +129,22 @@ public class SpringbootJdbcApplicationTests {
 //
     @Autowired
     private UserMapper userMapper;
+
+    @Test
+    public void select() throws Exception {
+        User user = new User();
+        user.setName("Jack");
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("name",user.getName());
+        PageHelper.startPage(1, 2);
+        List<User> list = userMapper.selectList(wrapper);
+        TableDataInfo rspData = new TableDataInfo();
+        rspData.setCode(HttpStatus.SUCCESS);
+        rspData.setRows(list);
+        rspData.setMsg("查询成功");
+        rspData.setTotal(new PageInfo(list).getTotal());
+        System.out.println(rspData);
+    }
 
     @Test
     public void testSelect() {

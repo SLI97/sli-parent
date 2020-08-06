@@ -6,6 +6,7 @@ import com.sli.common.core.utils.StringUtils;
 import com.sli.api.system.domain.SysRole;
 import com.sli.api.system.domain.SysUser;
 import com.sli.common.core.exception.CustomException;
+import com.sli.datascope.annotation.DataScope;
 import com.sli.entity.SysPost;
 import com.sli.entity.SysUserPost;
 import com.sli.entity.SysUserRole;
@@ -56,7 +57,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 用户信息集合信息
      */
     @Override
-//    @DataScope(deptAlias = "d", userAlias = "u")
+    @DataScope(deptAlias = "d", userAlias = "u")
     public List<SysUser> selectUserList(SysUser user)
     {
         return userMapper.selectUserList(user);

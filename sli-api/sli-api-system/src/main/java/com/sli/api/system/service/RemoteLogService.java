@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author ruoyi
  */
 @Component
-@FeignClient(/*contextId = "remoteLogService",*/ value = ServiceNameConstants.SYSTEM_SERVICE, fallbackFactory = RemoteLogFallbackFactory.class)
+@FeignClient(value = ServiceNameConstants.SYSTEM_SERVICE, fallbackFactory = RemoteLogFallbackFactory.class)
 public interface RemoteLogService
 {
     /**

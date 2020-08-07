@@ -30,7 +30,7 @@
         <pagehelper.boot.version>1.2.12</pagehelper.boot.version>
         <swagger.core.version>1.5.24</swagger.core.version>
         <swagger.fox.version>2.9.2</swagger.fox.version>
-        <sli-common.version>1.0.1-SNAPSHOT</sli-common.version>
+        <fastjson.version>1.2.70</fastjson.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -45,6 +45,12 @@
             <dependency>
                 <groupId>com.sli</groupId>
                 <artifactId>sli-common-datascope</artifactId>
+                <version>${sli.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sli</groupId>
+                <artifactId>sli-common-log</artifactId>
                 <version>${sli.version}</version>
             </dependency>
 
@@ -85,16 +91,16 @@
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-config</artifactId>
-                <version>2.0.2.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-                <version>2.0.2.RELEASE</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.cloud</groupId>-->
+                <!--<artifactId>spring-cloud-starter-config</artifactId>-->
+                <!--<version>2.0.2.RELEASE</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.cloud</groupId>-->
+                <!--<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+                <!--<version>2.0.2.RELEASE</version>-->
+            <!--</dependency>-->
 
             <!-- Mybatis 依赖配置 -->
             <dependency>
@@ -129,6 +135,13 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.boot.version}</version>
+            </dependency>
+
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
             <!-- Swagger 依赖配置 -->

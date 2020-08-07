@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sli-common-core</artifactId>
+
     <dependencies>
 
         <!-- SpringCloud Openfeign -->
@@ -28,7 +29,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>5.1.2.RELEASE</version>
+            <!--<version>5.1.2.RELEASE</version>-->
         </dependency>
 
         <!-- SpringBoot Boot Redis -->
@@ -44,11 +45,11 @@
             <version>2.9.7</version>
         </dependency>
 
-        <!-- slf4j -->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-log4j12</artifactId>-->
-<!--        </dependency>-->
+        <!-- Alibaba Fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
 
         <!-- Pagehelper -->
         <dependency>
@@ -67,15 +68,19 @@
             <artifactId>spring-security-core</artifactId>
         </dependency>
 
+        <!-- Java Validation -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
 
+        <!-- Apache Lang3 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

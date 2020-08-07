@@ -19,16 +19,14 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootJdbcApplicationTests {
 //    @Autowired
@@ -148,6 +146,26 @@ public class SpringbootJdbcApplicationTests {
 
     @Test
     public void testSelect() {
+        List<String> list = new LinkedList<>();
+        list.add("1");
+        list.add("2");
+        list.add("1");
+        list.add("3");
+        list.add("2");
+        List<String> list2 =  list.stream().filter(i -> i.equals("1")).collect(Collectors.toList());
+        System.out.println(list2);
+        list2 = list.stream().map(i-> i + "haha").collect(Collectors.toList());
+        list2.forEach(System.out::println);
+//        System.out.println(list.toString());
+//
+//        String[] arrays = list.toArray(new String[1]);
+//        System.out.println(arrays.toString());
+//        list = Arrays.asList(arrays);
+//
+//        Set<String> set = new HashSet<>(list);
+//        System.out.println(set.toString());
+//        list = new LinkedList<>(set);
+//        System.out.println(list.toString());
     }
 
     @Test

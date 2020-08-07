@@ -25,6 +25,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
@@ -72,8 +74,8 @@ public class WorkflowApplication {
             return "admin1";
         }
 
-        @SysLog("我是user控制器")
-        @PreAuthorize("hasRole('ROLE_ROOT')")
+//        @SysLog("我是user控制器")
+//        @PreAuthorize("hasRole('ROLE_ROOT')")
         @RequestMapping(value = "/user/1", method = RequestMethod.GET)
         public String user(HttpServletResponse response) {
             return "user";
@@ -97,7 +99,9 @@ public class WorkflowApplication {
 //        }
 //
         @GetMapping("/user/select")
-        public TableDataInfo select() throws Exception {
+        public TableDataInfo select(@RequestBody User user) throws Exception {
+            RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
+
 //            User user = new User();
 //            user.setName(name);
             QueryWrapper<User> wrapper = new QueryWrapper<>();

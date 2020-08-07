@@ -103,7 +103,7 @@ public class DataScopeAspect {
             if (DATA_SCOPE_ALL.equals(dataScope)) {
                 sqlString = new StringBuilder();
                 break;
-            } else if (DATA_SCOPE_CUSTOM.equals(dataScope)) {
+            } else if (DATA_SCOPE_CUSTOM.equals(dataScope)) { //可以通过配置 sys_role_dept 自定义需要的部门的人员信息
                 sqlString.append(StringUtils.format(
                         " OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", deptAlias,
                         role.getRoleId()));

@@ -24,7 +24,7 @@
         <!--SpringCloud最新稳定版本-->
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <kaptcha.version>2.3.2</kaptcha.version>
-        <guava.version>26.0-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <spring-boot.mybatis>2.1.2</spring-boot.mybatis>
         <druid.version>1.0.19</druid.version>
         <pagehelper.boot.version>1.2.12</pagehelper.boot.version>
